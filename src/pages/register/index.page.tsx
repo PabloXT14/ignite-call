@@ -29,7 +29,7 @@ export default function Register() {
   })
 
   async function handleRegister(data: RegisterFormData) {
-    // Simulando delay de requisição
+    // Simulando delay de requisição (remover a qualquer momento)
     await new Promise<void>((resolve) =>
       setTimeout(() => {
         console.log(data)
