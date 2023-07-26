@@ -17,6 +17,8 @@ export default function ConnectCalendar() {
     await signIn('google', { callbackUrl: '/register/connect-calendar' })
   }
 
+  console.log(session)
+
   return (
     <Container>
       <Header>

@@ -43,6 +43,14 @@ export function buildNextAuthOptions(
 
         return true
       },
+      // Função de callback que retorna os dados da sessão e do usuário autenticado
+      async session({ session, user }) {
+        // Retorna os dados da sessão e todos os dados do usuário autenticado (por padrão só é enviado o name e email)
+        return {
+          ...session,
+          user,
+        }
+      },
     },
   }
 }
