@@ -1,4 +1,4 @@
-// Essa tipagem serve para o NextAuth saber como é a estrutura das nossas tabelas criadas no banco de dados (as quais realizamos alterações que diferem da estrutura padrão do NextAuth em relação a estrutura de autenticação).
+// Tipagem personalizada para o NextAuth, especificando as propriedades esperadas para o objeto de usuário e sessão, pois foram feitas alterações na estrutura de autenticação em relação à configuração padrão.
 import NextAuth from 'next-auth'
 
 declare module 'next-auth' {
