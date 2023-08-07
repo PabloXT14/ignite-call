@@ -1,10 +1,19 @@
+import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { getServerSession } from 'next-auth'
-import { Button, Heading, MultiStep, Text, TextArea } from '@ignite-ui/react'
+import {
+  Button,
+  Heading,
+  MultiStep,
+  Text,
+  TextArea,
+  Avatar,
+} from '@ignite-ui/react'
 import { ArrowRight } from 'phosphor-react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { api } from '@/lib/axios'
 
 import { Container, Header } from '../styles'
 import { FormAnnotation, ProfileBox } from './styles'
@@ -27,11 +36,16 @@ export default function UpdateProfile() {
   })
 
   const session = useSession()
-
-  console.log(session)
+  const router = useRouter()
 
   async function handleUpdateProfile(data: UpdateProfileFormData) {
-    console.log(data)
+    const { bio } = data
+
+    await api.put('/users/profile', {
+      bio,
+    })
+
+    await router.push(`/schedule/${session.data?.user.username}`)
   }
 
   return (
@@ -49,6 +63,11 @@ export default function UpdateProfile() {
       <ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
         <label>
           <Text>Foto do perfil</Text>
+          <Avatar
+            src={session.data?.user.avatar_url}
+            alt={session.data?.user.name}
+            referrerPolicy="no-referrer"
+          />
         </label>
 
         <label>
