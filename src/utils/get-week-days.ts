@@ -6,7 +6,7 @@ interface GetWeekDaysParams {
 export function getWeekDays({
   locale = 'pt-BR',
   short = false,
-}: GetWeekDaysParams) {
+}: GetWeekDaysParams = {}) {
   const formatter = Intl.DateTimeFormat(locale, { weekday: 'long' })
 
   const weekdays = [
