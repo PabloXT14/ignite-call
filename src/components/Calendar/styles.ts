@@ -110,6 +110,11 @@ export const CalendarDay = styled('button', {
           transform: 'translate(-50%, -50%)',
           borderRadius: '$full',
           backgroundColor: '$ignite500',
+
+          '@media(max-width: 425px)': {
+            width: '$1',
+            height: '$1',
+          },
         },
       },
       false: {},
