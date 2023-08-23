@@ -32,6 +32,7 @@ export default async function handler(
 
   if (isPasteDate) {
     return res.status(200).json({
+      possibleTimes: [],
       availability: [],
     })
   }
@@ -45,6 +46,7 @@ export default async function handler(
 
   if (!userAvailability) {
     return res.status(200).json({
+      possibleTimes: [],
       availability: [],
     })
   }
