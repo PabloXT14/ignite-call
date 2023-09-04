@@ -56,7 +56,7 @@ export default async function handler(
     })
   }
 
-  await prisma.scheduling.create({
+  const scheduling = await prisma.scheduling.create({
     data: {
       name,
       email,
@@ -64,6 +64,38 @@ export default async function handler(
       date: schedulingDate.toDate(),
       user_id: user.id,
     }
+  })
+
+  // Enviando scheduling para o Google Calendar 
+  const calendar = await google.calendar({
+    version: 'v3',
+    auth: await getGoogleOAuthToken(user.id)
+  })
+
+  await calendar.events.insert({
+    calendarId: 'primary', // para inserir scheduling no calendar principal do usuário
+    conferenceDataVersion: 1, // para conseguirmos já criar um link com o Google Meet
+    requestBody: {
+      summary: `Ignite Call: ${name}`,
+      description: observations,
+      start: {
+        dateTime: schedulingDate.format(),
+      },
+      end: {
+        dateTime: schedulingDate.add(1, 'hour').format(),
+      },
+      attendees: [// para inserir quem vai participar do scheduling
+        { email, displayName: name },
+      ],
+      conferenceData: {// para inserir o link/ligação com o Google Meet (para mais detalhes veja a documentação do Google Calendar)
+        createRequest: {
+          requestId: scheduling.id,
+          conferenceSolutionKey: {
+            type: 'hangoutsMeet',
+          },
+        },
+      },
+    },
   })
 
   return res.status(201).end()
