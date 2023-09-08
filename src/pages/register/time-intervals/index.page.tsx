@@ -113,17 +113,14 @@ export default function TimeIntervals() {
 
   return (
     <>
-      <NextSeo
-        title='Selecione sua disponibilidade | Ignite Call'
-        noindex
-      />
+      <NextSeo title="Selecione sua disponibilidade | Ignite Call" noindex />
 
       <Container>
         <Header>
           <Heading as="strong">Quase lá</Heading>
           <Text>
-            Defina o intervalo de horário que você está disponível em cada dia da
-            semana
+            Defina o intervalo de horário que você está disponível em cada dia
+            da semana
           </Text>
 
           <MultiStep size={4} currentStep={3} />

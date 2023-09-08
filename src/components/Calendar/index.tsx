@@ -62,17 +62,21 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
   const username = String(router.query.username)
 
   const { data: blockedDates } = useQuery<BlockedDates>({
-    queryKey: ['blocked-dates', currentDate.get('year'), currentDate.get('month')],
+    queryKey: [
+      'blocked-dates',
+      currentDate.get('year'),
+      currentDate.get('month'),
+    ],
     queryFn: async () => {
       const response = await api.get(`/users/${username}/blocked-dates`, {
         params: {
           year: currentDate.get('year'),
-          month: String(currentDate.get('month') + 1).padStart(2, '0'), //pois no mysql janeiro é representado pelo nº1  
-        }
+          month: String(currentDate.get('month') + 1).padStart(2, '0'), // pois no mysql janeiro é representado pelo nº1
+        },
       })
 
       return response.data
-    }
+    },
   })
 
   const calendarWeeks = useMemo(() => {
@@ -116,13 +120,13 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
         return { date, disabled: true }
       }),
       ...daysInMonthArray.map((date) => {
-        return { 
+        return {
           date,
           disabled:
             date.endOf('day').isBefore(new Date()) ||
             blockedDates.blockedWeekDays.includes(date.get('day')) ||
             blockedDates.blockedDates.includes(date.get('date')),
-        } 
+        }
       }),
       ...nextMonthFillArray.map((date) => {
         return { date, disabled: true }
@@ -149,7 +153,7 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
     return calendarWeeks
   }, [currentDate, blockedDates])
 
-  //console.log(calendarWeeks)
+  // console.log(calendarWeeks)
 
   return (
     <CalendarContainer>

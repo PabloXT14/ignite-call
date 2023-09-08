@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/prisma';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { prisma } from '@/lib/prisma'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,11 +19,11 @@ export default async function handler(
   const user = await prisma.user.findUnique({
     where: {
       username,
-    }
+    },
   })
 
   if (!user) {
-    return res.status(400).json({ message: 'User does not exist.'})
+    return res.status(400).json({ message: 'User does not exist.' })
   }
 
   const availableWeekDays = await prisma.userTimeInterval.findMany({
@@ -37,7 +37,9 @@ export default async function handler(
 
   // 0 = Sunday ... 6 = Saturday
   const blockedWeekDays = [0, 1, 2, 3, 4, 5, 6].filter((availableWeekDay) => {
-    return !availableWeekDays.some(({ week_day }) => week_day === availableWeekDay)
+    return !availableWeekDays.some(
+      ({ week_day }) => week_day === availableWeekDay,
+    )
   })
 
   const blockedDatesRaw: Array<{ date: number }> = await prisma.$queryRaw`

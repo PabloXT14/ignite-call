@@ -51,17 +51,14 @@ export default function UpdateProfile() {
 
   return (
     <>
-      <NextSeo
-        title='Atualize seu perfil | Ignite Call'
-        noindex
-      />
+      <NextSeo title="Atualize seu perfil | Ignite Call" noindex />
 
       <Container>
         <Header>
           <Heading as="strong">Bem-vindo ao Ignite Call!</Heading>
           <Text>
-            Precisamos de algumas informações para criar seu perfil! Ah, você pode
-            editar essas informações depois.
+            Precisamos de algumas informações para criar seu perfil! Ah, você
+            pode editar essas informações depois.
           </Text>
 
           <MultiStep size={4} currentStep={4} />

@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import { google } from 'googleapis'
 
 import { prisma } from '@/lib/prisma'
-import { getGoogleOAuthToken } from '@/lib/google' 
+import { getGoogleOAuthToken } from '@/lib/google'
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,12 +14,12 @@ export default async function handler(
     return res.status(405).end()
   }
 
-  const username = String (req.query.username)
+  const username = String(req.query.username)
 
   const user = await prisma.user.findUnique({
     where: {
       username,
-    }
+    },
   })
 
   if (!user) {
@@ -33,7 +33,9 @@ export default async function handler(
     date: z.string().datetime(),
   })
 
-  const { name, email, observations, date } = createSchedulingBody.parse(req.body)
+  const { name, email, observations, date } = createSchedulingBody.parse(
+    req.body,
+  )
 
   const schedulingDate = dayjs(date).startOf('hour')
 
@@ -47,7 +49,7 @@ export default async function handler(
     where: {
       user_id: user.id,
       date: schedulingDate.toDate(),
-    }
+    },
   })
 
   if (conflictingScheduling) {
@@ -63,13 +65,13 @@ export default async function handler(
       observations,
       date: schedulingDate.toDate(),
       user_id: user.id,
-    }
+    },
   })
 
-  // Enviando scheduling para o Google Calendar 
+  // Enviando scheduling para o Google Calendar
   const calendar = await google.calendar({
     version: 'v3',
-    auth: await getGoogleOAuthToken(user.id)
+    auth: await getGoogleOAuthToken(user.id),
   })
 
   await calendar.events.insert({
@@ -84,10 +86,12 @@ export default async function handler(
       end: {
         dateTime: schedulingDate.add(1, 'hour').format(),
       },
-      attendees: [// para inserir quem vai participar do scheduling
+      attendees: [
+        // para inserir quem vai participar do scheduling
         { email, displayName: name },
       ],
-      conferenceData: {// para inserir o link/ligação com o Google Meet (para mais detalhes veja a documentação do Google Calendar)
+      conferenceData: {
+        // para inserir o link/ligação com o Google Meet (para mais detalhes veja a documentação do Google Calendar)
         createRequest: {
           requestId: scheduling.id,
           conferenceSolutionKey: {

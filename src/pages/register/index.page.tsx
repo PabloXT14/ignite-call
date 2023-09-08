@@ -60,16 +60,14 @@ export default function Register() {
 
   return (
     <>
-      <NextSeo
-        title='Crie uma conta | Ignite Call'
-      />
+      <NextSeo title="Crie uma conta | Ignite Call" />
 
       <Container>
         <Header>
           <Heading as="strong">Bem-vindo ao Ignite Call!</Heading>
           <Text>
-            Precisamos de algumas informações para criar seu perfil! Ah, você pode
-            editar essas informações depois.
+            Precisamos de algumas informações para criar seu perfil! Ah, você
+            pode editar essas informações depois.
           </Text>
           <MultiStep size={4} currentStep={1} />
         </Header>
