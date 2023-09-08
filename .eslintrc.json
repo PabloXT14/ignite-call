@@ -4,6 +4,6 @@
     "next/core-web-vitals"
   ],
   "rules": {
-    "camelcase": "off",
+    "camelcase": "off"
   }
 }
