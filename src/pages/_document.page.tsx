@@ -19,6 +19,7 @@ export default function Document() {
           id="stitches"
           dangerouslySetInnerHTML={{ __html: getCssText() }}
         />
+        <link rel="shortcut icon" href="logo-ignite.svg" type="image/svg" />
       </Head>
       <body>
         <Main />
