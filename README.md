@@ -45,7 +45,7 @@
 
 ## 💻 About
 
-Neste projeto, construímos um Design System em formato de `monorepo`, documentando `tokens` (cores, tamanhos de fonte, espaçamento, etc.) e `componentes` React com a ferramenta `Storybook`. Utilizamos o `turbo-repo` para automatizar o processo de build dos pacotes, garantindo eficiência e escalabilidade. Com o `changeset`, facilitamos a atualização e publicação dos pacotes no `npm`, mantendo um histórico claro das alterações. Essa abordagem promove reutilização, padronização e colaboração entre diferentes projetos.
+O projeto **Ignite Call** é uma aplicação de agendamentos que permite aos usuários compartilhar seu calendário e permitir que outros reservem horários disponíveis. A aplicação também se integra ao `Google Calendar` para visualização de agendamentos em diferentes plataformas. Desenvolvemos este projeto utilizando um `Design System` personalizado, o framework `Next.js` para o front-end e o ORM `Prisma` para interações com o banco de dados, incluindo validações e muito mais.
 
 Vale ressaltar que este projeto foi desenvolvido como conclusão de um desafio proposto no curso/trilha **Ignite** oferecido pela [Rocketseat](https://www.rocketseat.com.br/).
 
