@@ -3,7 +3,7 @@ import { Heading, Text } from '@ignite-ui/react'
 import { NextSeo } from 'next-seo'
 
 import previewImage from '@/assets/app-preview.png'
-import { Container, Hero, Preview } from './styles'
+import { Container, GridImage, Hero, Preview } from './styles'
 import { ClaimUsernameForm } from './components/ClaimUsernameForm'
 
 export default function Home() {
@@ -38,6 +38,8 @@ export default function Home() {
           />
         </Preview>
       </Container>
+
+      <GridImage />
     </>
   )
 }

@@ -1,4 +1,5 @@
 import { Heading, Text, styled } from '@ignite-ui/react'
+import gridImage from '../../assets/grid-effect.png'
 
 export const Container = styled('div', {
   maxWidth: 'calc(100vw - (100vw - 1160px) / 2)',
@@ -36,4 +37,14 @@ export const Preview = styled('div', {
   '@media(max-width: 768px)': {
     display: 'none',
   },
+})
+
+export const GridImage = styled('div', {
+  position: 'absolute',
+  inset: 0,
+  zIndex: -1,
+  backgroundImage: `url(${gridImage.src})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center left',
+  // backgroundSize: 'cover',
 })
